@@ -1,12 +1,10 @@
 
-# 4LOOP MEAN
-
-# ![MEAN Logo](https://www.mysql.com/common/logos/logo-mysql-170x115.png)  <img src="https://mariadb.org/wp-content/uploads/2015/10/mariadb-usa-inc.png" width="200px" />
+# SMSI MEAN
 
 <img src="http://mean.io/wp-content/themes/twentysixteen-child/images/express.png" width="200px" />![MEAN Logo](https://code-maven.com/img/angularjs.png) <img src="https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg" width="100px" height="100px" />
 
 
-4LOOP MEAN is a framework for an easy starting point with [MySQL](https://www.mysql.com/) / [MariaDB](https://mariadb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](https://angularjs.org/) based applications. It is designed to give you a quick and organized way to start developing MEAN based web apps with useful modules pre-bundled and configured.
+SMSI MEAN is a framework for an easy starting point with [MySQL](https://www.mysql.com/) / [MariaDB](https://mariadb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](https://angularjs.org/) based applications. It is designed to give you a quick and organized way to start developing MEAN based web apps with useful modules pre-bundled and configured.
 
 ## Prerequisite Technologies
 ### Linux
