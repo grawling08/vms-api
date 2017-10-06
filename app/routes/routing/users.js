@@ -42,13 +42,10 @@ exports.login = (req, res) => {
 }
 
 exports.currentUser = (req, res) => {
-    console.log('currentuser');
     if(req.headers.authorization && req.headers.hasOwnProperty('authorization') && req.headers.authorization.split(' ')[0] === 'Bearer'){
-        console.log('if headers');
         var token = req.headers.authorization.split(' ')[1];
         try{
             var decoded = jwt.verify(token, config.app_secretkey);
-            console.log("decoded: " + decoded)
             users.getUser(decoded._id, (err, currUser) => {
                 if(err){
                     res.status(400).json({
@@ -69,7 +66,6 @@ exports.currentUser = (req, res) => {
             console.log(err);
         }
     } else {
-        console.log('asdf');
         res.status(401).json({
             response: {
                 msg: 'Invalid request.. Authorized token required',

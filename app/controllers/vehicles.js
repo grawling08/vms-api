@@ -28,7 +28,28 @@ Vehicles.prototype.getAllVehicles = (next) => {
 Vehicles.prototype.createVehicle = (data, next) => {
     async.waterfall([
         (callback) => {
+            vehiclesDao.checkVehicleDuplicate(data.year, data.make, data.model, data.plateno, (err, response) => {
+                if (err) {
+                    next({
+                        success: false,
+                        msg: err,
+                        result: err
+                    },null);
+                }
+                if (response && response.length > 0){
+                    next(null,{
+                        success: false,
+                        msg: 'Vehicle already existed',
+                        result: null
+                    });
+                    return;
+                } else {
+                    callback();
+                }
+            });
+        }, (callback) => {
             vehiclesDao.createVehicle(data, function(err, response){
+                console.log(data);
                 next(null, {
                     success: true,
                     msg: 'Record successfully saved',
