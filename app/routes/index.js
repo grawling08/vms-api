@@ -9,7 +9,7 @@ var validatorUser = require('../validation/users');
 // ======================== ROUTING ============================ //
 var users = require('./routing/users');
 var vehicles = require('./routing/vehicles');
-
+var repairs = require('./routing/repairs');
 
 
 module.exports = function(app,config, middleware, passport) {
@@ -48,4 +48,15 @@ module.exports = function(app,config, middleware, passport) {
         .get(vehicles.getVehicle)
         .delete(vehicles.deleteVehicle)
         .put(vehicles.updateVehicle);
+
+    //=============== REPAIRS =====================//
+
+    app.route(config.api_version + '/repairs')
+        .get(repairs.getAllRepairs)
+        .post(repairs.createRepair);
+
+    app.route(config.api_version + '/repairs/:id')
+        .get(repairs.getRepairsByVehicle)
+        .delete(repairs.deleteRepair)
+        .put(repairs.updateRepair);
 };
