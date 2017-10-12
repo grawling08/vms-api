@@ -10,6 +10,9 @@ var validatorUser = require('../validation/users');
 var users = require('./routing/users');
 var vehicles = require('./routing/vehicles');
 var repairs = require('./routing/repairs');
+var logs = require('./routing/logs');
+var vtype = require('./routing/vehicletypes');
+var locations = require('./routing/locations');
 
 
 module.exports = function(app,config, middleware, passport) {
@@ -59,4 +62,35 @@ module.exports = function(app,config, middleware, passport) {
         .get(repairs.getRepairsByVehicle)
         .delete(repairs.deleteRepair)
         .put(repairs.updateRepair);
+
+    //=============== LOGS =====================//
+
+    app.route(config.api_version + '/logs')
+        .get(logs.getAllLogs)
+        .post(logs.createLogs);
+    
+    app.route(config.api_version + '/logs/:id')
+        .get(logs.getLogById);
+
+    //=============== REPAIRS =====================//
+
+    app.route(config.api_version + '/vehicletypes')
+        .get(vtype.getAllVehicleTypes)
+        .post(vtype.createVehicleTypes);
+
+    app.route(config.api_version + '/vehicletypes/:id')
+        .get(vtype.getVehicleTypesById)
+        .delete(vtype.deleteVehicleType)
+        .put(vtype.updateVehicleTypes);
+
+    //=============== LOCATIONS =====================//
+
+    app.route(config.api_version + '/locations')
+        .get(locations.getAllLocations)
+        .post(locations.createLocations);
+
+    app.route(config.api_version + '/locations/:id')
+        .get(locations.getLocationById)
+        .delete(locations.deleteLocation)
+        .put(locations.updateLocation);
 };
