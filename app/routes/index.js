@@ -13,6 +13,7 @@ var repairs = require('./routing/repairs');
 var logs = require('./routing/logs');
 var vtype = require('./routing/vehicletypes');
 var locations = require('./routing/locations');
+var travels = require('./routing/travels');
 
 
 module.exports = function(app,config, middleware, passport) {
@@ -59,9 +60,12 @@ module.exports = function(app,config, middleware, passport) {
         .post(repairs.createRepair);
 
     app.route(config.api_version + '/repairs/:id')
-        .get(repairs.getRepairsByVehicle)
+        .get(repairs.getRepairsById)
         .delete(repairs.deleteRepair)
         .put(repairs.updateRepair);
+    
+    app.route(config.api_version + '/repairs/vehicle/:v_id')
+        .get(repairs.getRepairsByVehicle)
 
     //=============== LOGS =====================//
 
@@ -93,4 +97,18 @@ module.exports = function(app,config, middleware, passport) {
         .get(locations.getLocationById)
         .delete(locations.deleteLocation)
         .put(locations.updateLocation);
+    
+    //=============== TRAVELS =====================//
+
+    app.route(config.api_version + '/travels')
+        .get(travels.getAllTravels)
+        .post(travels.createTravels);
+
+    app.route(config.api_version + '/travels/:id')
+        .get(travels.getTravelById)
+        .delete(travels.deleteTravel)
+        .put(travels.updateTravel);
+    
+    app.route(config.api_version + '/travels/:id/vehicle/:v_id')
+        .get(travels.getTravelsByVehicle);
 };

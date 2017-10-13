@@ -5,7 +5,7 @@ var Database = require('../../app/utils/database').Database;
 var db = new Database();
 
 exports.getAllRepairs = (next) => {
-	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id FROM repairs U;');
+	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id, MD5(v_id) as _idv FROM repairs U;');
 	db.query(strSQL, next);
 };
 
@@ -17,8 +17,13 @@ exports.createRepair = (repairs, next) => {
 	db.insertWithId(strSQL, next);
 };
 
+exports.getRepairsById = (id, next) => {
+	var strSQL = mysql.format('SELECT *, MD5(id) as _id, MD5(v_id) as _idv FROM repairs WHERE MD5(id)=? LIMIT 1', [id]);
+	db.query(strSQL, next);	
+};
+
 exports.getRepairsByVehicle = (v_id, next) => {
-	var strSQL = mysql.format('SELECT *, MD5(id) as _id  FROM repairs WHERE MD5(v_id)=? LIMIT 1', [v_id]);
+	var strSQL = mysql.format('SELECT *, MD5(id) as _id, MD5(v_id) as _idv  FROM repairs WHERE MD5(v_id)=?', [v_id]);
 	db.query(strSQL, next);	
 };
 

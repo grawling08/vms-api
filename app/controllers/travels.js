@@ -1,15 +1,15 @@
 'use strict';
 
-var repairsDao = require('../daos/repairs');
+var travelsDao = require('../daos/travels');
 
 var async = require('async');
 
-function Repairs() {
-    this.repairsDao = repairsDao;
+function Travels() {
+    this.travelsDao = travelsDao;
 }
 
-Repairs.prototype.getAllRepairs = (next) => {
-    repairsDao.getAllRepairs((err, response) => {
+Travels.prototype.getAllTravels = (next) => {
+    travelsDao.getAllTravels((err, response) => {
         if (err) {
             next({
                 success: false,
@@ -25,11 +25,10 @@ Repairs.prototype.getAllRepairs = (next) => {
     });
 };
 
-Repairs.prototype.createRepair = (data, next) => {
+Travels.prototype.createTravels = (data, next) => {
     async.waterfall([
         (callback) => {
-            repairsDao.createRepair(data, function(err, response){
-                console.log(data);
+            travelsDao.createTravels(data, function(err, response){
                 next(null, {
                     success: true,
                     msg: 'Record successfully saved',
@@ -40,8 +39,8 @@ Repairs.prototype.createRepair = (data, next) => {
     ], next);
 };
 
-Repairs.prototype.getRepairsById = (id, next) => {
-    repairsDao.getRepairsById(id, function(err, response){
+Travels.prototype.getTravelById = (id, next) => {
+    travelsDao.getTravelById(id, function(err, response){
         if (err) {
             next({
                 success: false,
@@ -60,14 +59,17 @@ Repairs.prototype.getRepairsById = (id, next) => {
     });
 };
 
-Repairs.prototype.getRepairsByVehicle = (v_id, next) => {
-    repairsDao.getRepairsByVehicle(v_id, function(err, response){
+Travels.prototype.getTravelsByVehicle = (id, v_id, next) => {
+    travelsDao.getTravelsByVehicle(id, v_id, function(err, response){
         if (err) {
             next({
                 success: false,
                 msg: err,
                 result: err
             }, null);
+        }
+        if (response && response.length > 0){
+            response = response[0];
         }
         next(null,{
             success: true,
@@ -77,8 +79,8 @@ Repairs.prototype.getRepairsByVehicle = (v_id, next) => {
     });
 };
 
-Repairs.prototype.deleteRepair = (id, next) => {
-    repairsDao.deleteRepair(id,function(err, response){
+Travels.prototype.deleteTravel = (id, next) => {
+    travelsDao.deleteTravel(id,function(err, response){
         if (err) {
             next({
                 success: false,
@@ -88,16 +90,16 @@ Repairs.prototype.deleteRepair = (id, next) => {
         }
         next(null,{
             success: true,
-            msg: 'Vehicle succesfully deleted',
+            msg: 'Travel succesfully deleted',
             result: response
         });
     });
 };
 
-Repairs.prototype.updateRepair = (id, data, next) => {
+Travels.prototype.updateTravel = (id, data, next) => {
     async.waterfall([
         (callback) => {
-            repairsDao.updateRepair(id, data, function(err, response){
+            travelsDao.updateTravel(id, data, function(err, response){
                 if (err) {
                     next({
                         success: false,
@@ -115,4 +117,4 @@ Repairs.prototype.updateRepair = (id, data, next) => {
     ], next);
 };
 
-exports.Repairs = Repairs;
+exports.Travels = Travels;

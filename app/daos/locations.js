@@ -30,7 +30,7 @@ exports.getLocationById = (id, next) => {
 	db.query(strSQL, next);	
 };
 
-exports.deleteRepairLocation = (id, next) => {
+exports.deleteLocation = (id, next) => {
 	var strSQL = mysql.format('DELETE FROM locations WHERE MD5(id)=?', [id]);
 	db.actionQuery(strSQL, next);	
 }

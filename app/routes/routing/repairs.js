@@ -18,8 +18,12 @@ exports.getAllRepairs = (req, res) => {
     repairs.getAllRepairs(cb.setupResponseCallback(res));
 };
 
+exports.getRepairsById = (req, res) => {
+    repairs.getRepairsById(req.params.id, cb.setupResponseCallback(res));
+};
+
 exports.getRepairsByVehicle = (req, res) => {
-    repairs.getRepairsByVehicle(req.params.id, cb.setupResponseCallback(res));
+    repairs.getRepairsByVehicle(req.params.v_id, cb.setupResponseCallback(res));
 };
 
 exports.deleteRepair = (req, res) => {
