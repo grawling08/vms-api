@@ -109,6 +109,6 @@ module.exports = function(app,config, middleware, passport) {
         .delete(travels.deleteTravel)
         .put(travels.updateTravel);
     
-    app.route(config.api_version + '/travels/:id/vehicle/:v_id')
+    app.route(config.api_version + '/travels/vehicle/:v_id')
         .get(travels.getTravelsByVehicle);
 };

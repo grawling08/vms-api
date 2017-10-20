@@ -59,17 +59,14 @@ Travels.prototype.getTravelById = (id, next) => {
     });
 };
 
-Travels.prototype.getTravelsByVehicle = (id, v_id, next) => {
-    travelsDao.getTravelsByVehicle(id, v_id, function(err, response){
+Travels.prototype.getTravelsByVehicle = (v_id, next) => {
+    travelsDao.getTravelsByVehicle(v_id, function(err, response){
         if (err) {
             next({
                 success: false,
                 msg: err,
                 result: err
             }, null);
-        }
-        if (response && response.length > 0){
-            response = response[0];
         }
         next(null,{
             success: true,

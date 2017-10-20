@@ -5,7 +5,7 @@ var Database = require('../../app/utils/database').Database;
 var db = new Database();
 
 exports.getAllTravels= (next) => {
-	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id FROM travels U;');
+	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id, MD5(U.vehicle_id) as v_id FROM travels U;');
 	db.query(strSQL, next);
 };
 
@@ -21,8 +21,8 @@ exports.getTravelById = (id, next) => {
 	db.query(strSQL, next);	
 };
 
-exports.getTravelsByVehicle = (id, v_id, next) => {
-	var strSQL = mysql.format('SELECT *, MD5(id) as _id FROM travels WHERE MD5(vehicle_id)=? AND MD5(id) = ? LIMIT 1', [v_id, id]);
+exports.getTravelsByVehicle = (v_id, next) => {
+	var strSQL = mysql.format('SELECT *, MD5(id) as _id FROM travels WHERE MD5(vehicle_id)=?', [v_id]);
 	db.query(strSQL, next);	
 };
 

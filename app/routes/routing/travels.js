@@ -23,7 +23,7 @@ exports.getTravelById = (req, res) => {
 };
 
 exports.getTravelsByVehicle = (req, res) => {
-    travel.getTravelsByVehicle(req.params.id, req.params.v_id, cb.setupResponseCallback(res));
+    travel.getTravelsByVehicle(req.params.v_id, cb.setupResponseCallback(res));
 };
 
 exports.deleteTravel = (req, res) => {
