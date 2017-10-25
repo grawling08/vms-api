@@ -76,7 +76,7 @@ module.exports = function(app,config, middleware, passport) {
     app.route(config.api_version + '/logs/:id')
         .get(logs.getLogById);
 
-    //=============== REPAIRS =====================//
+    //=============== VEHICLE TYPES  =====================//
 
     app.route(config.api_version + '/vehicletypes')
         .get(vtype.getAllVehicleTypes)

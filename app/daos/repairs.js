@@ -5,12 +5,12 @@ var Database = require('../../app/utils/database').Database;
 var db = new Database();
 
 exports.getAllRepairs = (next) => {
-	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id, MD5(v_id) as _idv FROM repairs U;');
+	var strSQL = mysql.format('SELECT a.*, b.vehicle, MD5(a.id) as _id, MD5(a.vehicle_id) as _idv FROM repairs AS a, vehicles AS b WHERE a.vehicle_id = b.id;');
 	db.query(strSQL, next);
 };
 
 exports.createRepair = (repairs, next) => {
-    var strSQL = mysql.format('INSERT INTO repairs(v_id, repairType, description, repairsby, shop, date, comments) \
+    var strSQL = mysql.format('INSERT INTO repairs(vehicle_id, repairType, description, repairsby, shop, date, comments) \
         VALUES(?,?,?,?,?,?,?)', [repairs.v_id, repairs.repairType, repairs.description, 
         repairs.repairby, repairs.shop, repairs.date, repairs.comments]);
     //console.log(strSQL);
@@ -18,12 +18,12 @@ exports.createRepair = (repairs, next) => {
 };
 
 exports.getRepairsById = (id, next) => {
-	var strSQL = mysql.format('SELECT *, MD5(id) as _id, MD5(v_id) as _idv FROM repairs WHERE MD5(id)=? LIMIT 1', [id]);
+	var strSQL = mysql.format('SELECT a.*, b.vehicle, MD5(a.id) as _id, MD5(a.vehicle_id) as _idv FROM repairs AS a, vehicles AS b WHERE a.vehicle_id = b.id AND MD5(a.id)=? LIMIT 1', [id]);
 	db.query(strSQL, next);	
 };
 
 exports.getRepairsByVehicle = (v_id, next) => {
-	var strSQL = mysql.format('SELECT *, MD5(id) as _id, MD5(v_id) as _idv  FROM repairs WHERE MD5(v_id)=?', [v_id]);
+	var strSQL = mysql.format('SELECT *, MD5(id) as _id, MD5(vehicle_id) as _idv FROM repairs WHERE MD5(vehicle_id)=?', [v_id]);
 	db.query(strSQL, next);	
 };
 
