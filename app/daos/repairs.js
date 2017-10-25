@@ -23,7 +23,7 @@ exports.getRepairsById = (id, next) => {
 };
 
 exports.getRepairsByVehicle = (v_id, next) => {
-	var strSQL = mysql.format('SELECT *, MD5(id) as _id, MD5(vehicle_id) as _idv FROM repairs WHERE MD5(vehicle_id)=?', [v_id]);
+	var strSQL = mysql.format('SELECT a.*, b.vehicle, MD5(a.id) as _id, MD5(a.vehicle_id) as _idv FROM repairs AS a, vehicles AS b WHERE a.vehicle_id = b.id AND MD5(a.vehicle_id)=?', [v_id]);
 	db.query(strSQL, next);	
 };
 
