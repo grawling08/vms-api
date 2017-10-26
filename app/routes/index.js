@@ -10,6 +10,7 @@ var validatorUser = require('../validation/users');
 var users = require('./routing/users');
 var vehicles = require('./routing/vehicles');
 var repairs = require('./routing/repairs');
+var parts = require('./routing/parts');
 var logs = require('./routing/logs');
 var vtype = require('./routing/vehicletypes');
 var locations = require('./routing/locations');
@@ -66,6 +67,21 @@ module.exports = function(app,config, middleware, passport) {
     
     app.route(config.api_version + '/repairs/vehicle/:v_id')
         .get(repairs.getRepairsByVehicle)
+
+
+    //=============== PARTS USED IN REPAIRS =====================//
+
+    app.route(config.api_version + '/parts')
+        .get(parts.getAllParts)
+        .post(parts.createPart);
+
+    app.route(config.api_version + '/parts/:id')
+        .get(parts.getPartsById)
+        .delete(parts.deletePart)
+        .put(parts.updatePart);
+    
+    app.route(config.api_version + '/parts/repair/:r_id')
+        .get(parts.getPartsByRepair)
 
     //=============== LOGS =====================//
 
