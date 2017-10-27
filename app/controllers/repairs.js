@@ -25,6 +25,23 @@ Repairs.prototype.getAllRepairs = (next) => {
     });
 };
 
+Repairs.prototype.getRepairParts = (next) => {
+    repairsDao.getRepairParts((err, response) => {
+        if (err) {
+            next({
+                success: false,
+                msg: err,
+                result: err
+            }, null);
+        }
+        next(null,{
+            success: true,
+            message: '',
+            result: response
+        });
+    });
+};
+
 Repairs.prototype.createRepair = (data, next) => {
     async.waterfall([
         (callback) => {

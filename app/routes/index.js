@@ -64,9 +64,13 @@ module.exports = function(app,config, middleware, passport) {
         .get(repairs.getRepairsById)
         .delete(repairs.deleteRepair)
         .put(repairs.updateRepair);
-    
+
+    app.route(config.api_version + '/repairparts')
+        .get(repairs.getRepairParts);
+
     app.route(config.api_version + '/repairs/vehicle/:v_id')
-        .get(repairs.getRepairsByVehicle)
+        .get(repairs.getRepairsByVehicle);
+    
 
 
     //=============== PARTS USED IN REPAIRS =====================//

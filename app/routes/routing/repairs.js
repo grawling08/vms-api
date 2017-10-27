@@ -18,6 +18,10 @@ exports.getAllRepairs = (req, res) => {
     repairs.getAllRepairs(cb.setupResponseCallback(res));
 };
 
+exports.getRepairParts = (req, res) => {
+    repairs.getRepairParts(cb.setupResponseCallback(res));
+};
+
 exports.getRepairsById = (req, res) => {
     repairs.getRepairsById(req.params.id, cb.setupResponseCallback(res));
 };
