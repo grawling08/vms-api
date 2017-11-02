@@ -33,9 +33,9 @@ exports.deletePart = (id, next) => {
 }
 
 exports.updatePart = (id, parts, next) => {
-    var strSQL = mysql.format('UPDATE Parts SET repair_id=?, date=?, partNumber=?, description=?, quantity=?, vendor=?, vendorLocation=?, cost=?, total=?  \
+    var strSQL = mysql.format('UPDATE partsused SET repair_id=?, date=?, partNumber=?, description=?, quantity=?, vendor=?, vendorLocation=?, cost=?, total=?  \
         WHERE MD5(id)=? ', [parts.repair_id, parts.date, parts.partNumber, parts.description, 
         parts.quantity, parts.vendor, parts.vendorLocation, parts.cost, parts.total, id]);
-    //console.log(strSQL);
+    console.log(strSQL);
 	db.actionQuery(strSQL, next);	
 }
