@@ -16,7 +16,7 @@ exports.createVehicleTypes = (vtype, next) => {
 };
 
 exports.checkVehicleTypeDuplicate = (name, next) => {
-	var strSQL = mysql.format('SELECT * FROM vehicletype WHERE name = ?', [username]);
+	var strSQL = mysql.format('SELECT * FROM vehicletype WHERE name = ?', [name]);
 	db.query(strSQL, next);
 };
 
