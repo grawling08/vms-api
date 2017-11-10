@@ -14,6 +14,8 @@ var parts = require('./routing/parts');
 var logs = require('./routing/logs');
 var vtype = require('./routing/vehicletypes');
 var locations = require('./routing/locations');
+var makes = require('./routing/makes');
+var models = require('./routing/models');
 var travels = require('./routing/travels');
 
 
@@ -117,6 +119,28 @@ module.exports = function(app,config, middleware, passport) {
         .get(locations.getLocationById)
         .delete(locations.deleteLocation)
         .put(locations.updateLocation);
+
+    //=============== MAKES =====================//
+
+    app.route(config.api_version + '/makes')
+        .get(makes.getAllMakes)
+        .post(makes.createMakes);
+
+    app.route(config.api_version + '/makes/:id')
+        .get(makes.getMakeById)
+        .delete(makes.deleteMake)
+        .put(makes.updateMake);
+
+    //=============== MODELS =====================//
+
+    app.route(config.api_version + '/models')
+        .get(models.getAllModels)
+        .post(models.createModels);
+
+    app.route(config.api_version + '/models/:id')
+        .get(models.getModelById)
+        .delete(models.deleteModel)
+        .put(models.updateModel);
     
     //=============== TRAVELS =====================//
 
