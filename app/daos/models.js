@@ -5,13 +5,14 @@ var Database = require('../../app/utils/database').Database;
 var db = new Database();
 
 exports.getAllModels = (next) => {
-	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id FROM models U;');
+	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id, V.name as "vehicletype", M.name as "make" FROM models U \
+								INNER JOIN vehicletype V ON U.vehicletype_id = V.id \
+								INNER JOIN makes M ON U.make_id = M.id');
 	db.query(strSQL, next);
 };
 
 exports.createModels = (model, next) => {
-    var strSQL = mysql.format('INSERT INTO models(make_id,name) VALUES(?,?)', [model.make_id, model.name]);
-    //console.log(strSQL);
+    var strSQL = mysql.format('INSERT INTO models(make_id, vehicletype_id, name) VALUES(?,?,?)', [model.make_id, model.vehicletype_id, model.name]);
 	db.insertWithId(strSQL, next);
 };
 
@@ -36,7 +37,6 @@ exports.deleteModel = (id, next) => {
 }
 
 exports.updateModel = (id, model, next) => {
-    var strSQL = mysql.format('UPDATE models SET make_id=?, name=? WHERE MD5(id)=? ', [model.make_id, model.name, id]);
-    //console.log(strSQL);
+    var strSQL = mysql.format('UPDATE models SET make_id=?, vehicletype_id=?, name=? WHERE MD5(id)=? ', [model.make_id, model.vehicletype_id, model.name, id]);
 	db.actionQuery(strSQL, next);	
 }

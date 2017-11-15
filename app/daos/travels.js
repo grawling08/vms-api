@@ -5,7 +5,8 @@ var Database = require('../../app/utils/database').Database;
 var db = new Database();
 
 exports.getAllTravels= (next) => {
-	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id, MD5(U.vehicle_id) as v_id FROM travels U;');
+	var strSQL = mysql.format('SELECT T.*, MD5(T.id) as _id, MD5(T.vehicle_id) as v_id, V.vehicle FROM travels T \
+						INNER JOIN vehicles V ON T.vehicle_id = V.id;');
 	db.query(strSQL, next);
 };
 
