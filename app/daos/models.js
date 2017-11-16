@@ -12,7 +12,7 @@ exports.getAllModels = (next) => {
 };
 
 exports.createModels = (model, next) => {
-    var strSQL = mysql.format('INSERT INTO models(make_id, vehicletype_id, name) VALUES(?,?,?)', [model.make_id, model.vehicletype_id, model.name]);
+    var strSQL = mysql.format('INSERT INTO models(make_id, name) VALUES(?,?)', [model.make_id, model.name]);
 	db.insertWithId(strSQL, next);
 };
 
@@ -37,6 +37,6 @@ exports.deleteModel = (id, next) => {
 }
 
 exports.updateModel = (id, model, next) => {
-    var strSQL = mysql.format('UPDATE models SET make_id=?, vehicletype_id=?, name=? WHERE MD5(id)=? ', [model.make_id, model.vehicletype_id, model.name, id]);
+    var strSQL = mysql.format('UPDATE models SET make_id=?, name=? WHERE MD5(id)=? ', [model.make_id, model.name, id]);
 	db.actionQuery(strSQL, next);	
 }
