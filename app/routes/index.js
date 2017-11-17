@@ -17,6 +17,7 @@ var locations = require('./routing/locations');
 var makes = require('./routing/makes');
 var models = require('./routing/models');
 var travels = require('./routing/travels');
+var accidents = require('./routing/accidents');
 
 
 module.exports = function(app,config, middleware, passport) {
@@ -155,4 +156,15 @@ module.exports = function(app,config, middleware, passport) {
     
     app.route(config.api_version + '/travels/vehicle/:v_id')
         .get(travels.getTravelsByVehicle);
+
+    //=============== ACCIDENTS =====================//
+
+    app.route(config.api_version + '/accidents')
+        .get(accidents.getAllAccidents)
+        .post(accidents.createAccidents);
+
+    app.route(config.api_version + '/accidents/:id')
+        .get(accidents.getAccidentById)
+        .delete(accidents.deleteAccident)
+        .put(accidents.updateAccident);
 };
