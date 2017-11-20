@@ -31,6 +31,13 @@ exports.getModelById = (id, next) => {
 	db.query(strSQL, next);	
 };
 
+exports.getModelByMake = (id, next) => {
+	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id, M.name as "make" FROM models U \
+								INNER JOIN makes M ON U.make_id = M.id \
+								WHERE M.id = ?', [id]);
+	db.query(strSQL, next);	
+};
+
 exports.deleteModel = (id, next) => {
 	var strSQL = mysql.format('DELETE FROM models WHERE MD5(id)=?', [id]);
 	db.actionQuery(strSQL, next);	

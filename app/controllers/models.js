@@ -79,6 +79,23 @@ Models.prototype.getModelById = (id, next) => {
     });
 };
 
+Models.prototype.getModelByMake = (id, next) => {
+    modelsDao.getModelByMake(id, (err, response) => {
+        if (err) {
+            next({
+                success: false,
+                msg: err,
+                result: err
+            }, null);
+        }
+        next(null,{
+            success: true,
+            message: '',
+            result: response
+        });
+    });
+};
+
 Models.prototype.deleteModel = (id, next) => {
     modelsDao.deleteModel(id,function(err, response){
         if (err) {

@@ -142,6 +142,9 @@ module.exports = function(app,config, middleware, passport) {
         .get(models.getModelById)
         .delete(models.deleteModel)
         .put(models.updateModel);
+
+    app.route(config.api_version + '/models/make/:id')
+        .get(models.getModelByMake);
     
     //=============== TRAVELS =====================//
 

@@ -22,6 +22,10 @@ exports.getModelById = (req, res) => {
     model.getModelById(req.params.id, cb.setupResponseCallback(res));
 };
 
+exports.getModelByMake = (req, res) => {
+    model.getModelByMake(req.params.id, cb.setupResponseCallback(res));
+};
+
 exports.deleteModel = (req, res) => {
     model.deleteModel(req.params.id, cb.setupResponseCallback(res));
 };
