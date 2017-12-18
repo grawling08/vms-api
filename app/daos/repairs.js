@@ -45,7 +45,8 @@ exports.updateRepair = (id, repairs, next) => {
 exports.getRepairParts = (next) => {
 	async.waterfall([
 		(callback) => {
-            var strSQL = mysql.format("SELECT a.id, MD5(a.id) AS _idpart, a.repair_id, a.date, a.partNumber, a.description, a.vendor, a.vendorLocation, a.quantity, a.cost, a.total FROM partsused AS a \
+            var strSQL = mysql.format("SELECT a.id, MD5(a.id) AS _idpart, a.repair_id, a.date, a.partNumber, a.description, \
+                a.vendor, a.vendorLocation, a.quantity, a.cost, a.total FROM partsused AS a \
             	INNER JOIN repairs AS b ON a.repair_id = b.id");
             db.query(strSQL, (err, repairparts) => {
                 if (err) {

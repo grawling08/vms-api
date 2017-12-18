@@ -22,11 +22,12 @@ module.exports = (passport, jwt, config) => {
     }));
 
     function verifyAuth(password, next){
+
         return function(err, user){
             if(err){
                 return next(err);
             }
-
+            console.dir(user);
             if(_.isEmpty(user)){
                 return next(null, {
                     msg:'User does not exist!',

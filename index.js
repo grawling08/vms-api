@@ -14,6 +14,7 @@ var application = require('./config/application'),
     passport = require('passport'),
     ejwt = require('express-jwt'),
     jwt = require('jsonwebtoken'),
+    cron = require('node-cron'),
     middleware = require('./app/utils/middleware'),
     config = require('./config/environment/' + env),
     Database = require('./app/utils/database').Database,
@@ -29,7 +30,10 @@ var router = express.Router({
     strict: true,
     caseSensitive: true
 });
-
+ 
+cron.schedule('* * * * *', function(){
+  console.log('running a task every minute');
+});
 
 require(application.utils + 'helper')(db, server, config, log);
 require(application.config + 'express')(app, config, passport, ejwt);
