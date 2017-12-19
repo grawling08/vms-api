@@ -5,7 +5,9 @@ var Database = require('../../app/utils/database').Database;
 var db = new Database();
 
 exports.getAllVehicles = (next) => {
-	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id FROM vehicles U;');
+	var strSQL = mysql.format('SELECT U.*, MD5(U.id) as _id, MK.name AS "make_name", MD.name AS "model_name" FROM vehicles U \
+								INNER JOIN makes MK ON U.make = MK.id \
+								INNER JOIN models MD ON MK.id = MD.make_id');
 	db.query(strSQL, next);
 };
 
